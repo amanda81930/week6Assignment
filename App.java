@@ -7,22 +7,17 @@ import java.util.Scanner;
 public class App {
 
   public static void main(String[] args) {
+    //a) instantiate a deck and two players & call shuffle method on deck
     Scanner usrChoice = new Scanner(System.in);
 
     while (true) {
-
       System.out.println("Do you wish to play a new War game?");
       System.out.println("Enter y for yes or n for no: ");
       String input = usrChoice.nextLine();
 
       if (input.equals("y") || input.equals("Y")) {
-
         Deck newDeck = new Deck();
-
-        /*
-         * for (Card card: newDeck.cardsList) { card.describeCard(); }
-         */
-
+       
         System.out.println("Please enter a name for Player 1: ");
         String p1Name = usrChoice.nextLine();
         System.out.println("Please enter a name for Player 2: ");
@@ -39,19 +34,18 @@ public class App {
         System.out.println("\t...Shuffling...\n");
         newDeck.shuffle();
 
+        //b) Using traditional for loop, iterate 52 times using Draw method 
         System.out.println("\t\t...Cards dealt - let's play!!\n");
         for (int i = 0; i < 52; i++) {
-
           if (i % 2 == 0) {
             p1Hand.add(newDeck.draw());
-          }
-
+          } //end of if
           else {
             p2Hand.add(newDeck.draw());
-          }
+          } //end of else
+        } //end of for 
 
-        }
-
+        //c) flip method
         for (int c = 1; c < 27; c++) {
           System.out.println("---------------");
           System.out.println("*Round " + c + "*\n");
@@ -61,8 +55,7 @@ public class App {
           Card card2 = playerTwo.flip();
           System.out.println("Player 2: " + playerTwo.getName());
           card2.describeCard();
-
-
+         //d) compare value & increment score method on highest value card
           if (card1.getValue() > card2.getValue()) {
             playerOne.incrementScore();
             System.out.println("     -----     ");
@@ -79,9 +72,10 @@ public class App {
             System.out.println("     -----     ");
             System.out.println("No points. It's a draw.");
             System.out.println("---------------\n");
-          }
-
-        }
+          } //end of if-else statements
+        } //end of for loop
+        
+        //e) compare final score & f) print final score
         System.out.println("---------------");
         System.out.println("FINAL SCORE: ");
         System.out.println("\tPlayer 1 - " + playerOne.getName() + ": " + playerOne.getScore());
@@ -91,22 +85,21 @@ public class App {
           System.out.println(playerOne.getName().toUpperCase() + " wins the game!");
         } else if (playerOne.getScore() < playerTwo.getScore()) {
           System.out.println(playerTwo.getName().toUpperCase() + " wins the game!");
-
         } else {
           System.out.println("It's a draw!");
-
-        }
+        } 
         System.out.println("\n---------------\n");
 
-
-
-      } else if (input.equals("n") || input.equals("N")) {
+      } //end of if statement for want to play a game 
+      else if (input.equals("n") || input.equals("N")) {
         System.out.println("Goodbye!");
         break;
       } else {
         System.out.println("Sorry, that was not a valid entry.");
-      }
-    }
+      } //end of if-else statement
+    } //end of while loop
+    //closes scanner
     usrChoice.close();
-  }
-}
+    
+  } //end of main METHOD
+} //end of CLASS
